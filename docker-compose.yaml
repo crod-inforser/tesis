@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  converter:
+    build: converter
+    image: rcg_converter:latest
+  api:
+    build: api
+    depends_on:
+      - converter
+    
