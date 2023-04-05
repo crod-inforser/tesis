@@ -17,7 +17,8 @@ const App = () => {
     // Conectar al socket y escuchar el evento "data"
     socket.on('data', (data: any) => {
       const plainData = inflate(data, { to: 'string' });
-      console.log(`Received data: ${plainData}`);
+      console.log(`Received data:`, plainData);
+      console.log(`Received data:`, JSON.parse(plainData));
       setMessages((prevMessages) => [...prevMessages, plainData]);
     });
 

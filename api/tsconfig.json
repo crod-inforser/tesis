@@ -71,6 +71,24 @@
       ],
       "@routes/*": [
         "src/routes/*"
+      ],
+      "@interfaces/*": [
+        "src/interfaces/*"
+      ],
+      "@util/*": [
+        "src/util/*"
+      ],
+      "@constants/*": [
+        "src/constants/*"
+      ],
+      "@controllers/*": [
+        "src/controllers/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@other/*": [
+        "src/other/*"
       ]
     },
     "useUnknownInCatchVariables": false

@@ -6,6 +6,10 @@ services:
     image: rcg_converter:latest
   api:
     build: api
+    ports:
+      - "3000:3000"
     depends_on:
       - converter
-    
+    volumes:
+      - "./api:/app"
+    command: sh -c "yarn && yarn dev"
