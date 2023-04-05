@@ -1,8 +1,13 @@
+import { promisify } from 'util';
 import { exec } from 'child_process';
+import logger from 'jet-logger'
 
-import { IDownloadParams } from '@interfaces/services/downloadService';
+import { IConvertParams } from '@interfaces/services/downloadService';
 import { RouteError } from '@other/classes';
 import HttpStatusCodes from '@constants/HttpStatusCodes';
+import { readdirSync } from 'fs';
+
+const do_exec = promisify(exec);
 
 // Errors
 const Errors = {
@@ -16,12 +21,17 @@ const Errors = {
  * @param url - La URL del archivo RCG a convertir.
  * @throws RouteError si no se puede convertir el archivo RCG.
  */
-export async function convert({ url }: IDownloadParams): Promise<void> {
-    const name = url.substring(url.lastIndexOf('/') + 1);
+export async function convert({ name }: IConvertParams): Promise<void> {
     try {
-        await exec(`rcg2txt ./download/${name} > ./download/${name}.txt`);
+        logger.info(`convert ${name} to txt`)
+        const dirs = readdirSync('./download');
+        if (!dirs.length || dirs.indexOf(name + '.txt') < 0) {
+            logger.info(`file not exist, converting...`)
+            await do_exec(`rcg2txt ./download/${name} > ./download/${name}.txt`);
+        } else logger.info(`file converted exist`)
+        logger.info(`finish converted to txt`)
     } catch (error) {
-        console.error('Error:', error);
+        logger.err(`Error on convert file to txt ${error} `)
         throw new RouteError(
             HttpStatusCodes.BAD_GATEWAY,
             Errors.onConvert(name),

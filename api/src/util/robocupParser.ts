@@ -1,17 +1,12 @@
-import { createReadStream } from "fs";
+import { createReadStream, existsSync } from "fs";
 import { createInterface } from "readline";
-import { gzipSync } from 'zlib';
-
+import logger from "jet-logger";
 import { tick } from './misc'
-import { io } from "@src/server";
-import { BallI, InfoI, InitI, PlayerI, PositionI, ResultI, SideE } from '@src/interfaces/util/robocupParser'
+import { sendToIO } from '@services/SocketService'
+import { BallI, InfoI, InitI, PlayerI, PositionI, ResultI, SideE } from '@interfaces/util/robocupParser'
+
 
 // Envia datos a una sala específica a través de un socket IO
-function sendToIO(room: string, data: any): void {
-    const jsonData = JSON.stringify(data);
-    const bufferData = Buffer.from(jsonData, 'utf8');
-    io.to(room).emit('data', gzipSync(bufferData));
-}
 
 // Funciones de análisis
 // Aquí hay muchas funciones de análisis como parseInfoLine, parsePlayerLine, etc.
@@ -140,31 +135,47 @@ function parseResultLine(line: string): ResultI {
     };
 }
 
+async function processLine(line: string, room: string) {
+    if (line.startsWith("(Init")) {
+        const init: InitI | null = parseInitLine(line);
+        if (!init) throw new Error("No se encontró la línea 'Init' en el archivo");
+        sendToIO(room, init);
+    } else if (line.startsWith("(Info")) {
+        const info: InfoI = parseInfoLine(line)
+        sendToIO(room, info);
+    } else if (line.startsWith("(Result")) {
+        const result: ResultI | null = parseResultLine(line);
+        if (!result) throw new Error("No se encontró la línea 'Result' en el archivo");
+        sendToIO(room, result);
+    }
+    await tick(100);
+}
+
 // Función principal para generar y enviar datos JSON
 // a través de un socket IO
 export async function generateAndSendJSON({ path, room }: { path: string, room: string }): Promise<void> {
     try {
+        logger.info(`convert to json ${path}`)
+
+        if (!existsSync(path)) {
+            logger.err(`El archivo no existe: ${path}`);
+            return;
+        }else logger.info(`file on txt exist!`)
+
         const rl = createInterface({
             input: createReadStream(path),
             crlfDelay: Infinity
         });
 
+        let n = 0;
         for await (const line of rl) {
-            if (line.startsWith("(Init")) {
-                const init: InitI | null = parseInitLine(line);
-                if (!init) throw new Error("No se encontró la línea 'Init' en el archivo");
-                sendToIO(room, init);
-            } else if (line.startsWith("(Info")) {
-                const info: InfoI = parseInfoLine(line)
-                sendToIO(room, info);
-            } else if (line.startsWith("(Result")) {
-                const result: ResultI | null = parseResultLine(line);
-                if (!result) throw new Error("No se encontró la línea 'Result' en el archivo");
-                sendToIO(room, result);
-            }
+            logger.info(`read line ${n}`)
+            await processLine(line, room)
+            n++;
             await tick(100);
         }
+        logger.info(`end converting`)
     } catch (e) {
-        console.error("Error al obtener el JSON", e);
+        logger.err(`Error on download ${e} `)
     }
 }

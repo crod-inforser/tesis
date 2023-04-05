@@ -25,8 +25,10 @@ const args = parse<IArgs>({
     type: String,
     defaultValue: 'development',
     alias: 'e',
+    optional: true,
   },
 });
+
 
 // Set the env file
 const result2 = dotenv.config({

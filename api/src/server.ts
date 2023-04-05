@@ -3,23 +3,21 @@
  */
 
 import morgan from 'morgan';
-import path from 'path';
 import helmet from 'helmet';
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response, } from 'express';
 import logger from 'jet-logger';
 import cors from 'cors'
 import { createServer } from 'http';
-import { Server as SocketIOServer } from 'socket.io';
-
 import 'express-async-errors';
 
-import BaseRouter from '@src/routes/api';
-import Paths from '@src/routes/constants/Paths';
+import {initializeSocket} from './socket'
+import BaseRouter from '@routes/api';
+import Paths from '@routes/constants/Paths';
 
-import EnvVars from '@src/constants/EnvVars';
-import HttpStatusCodes from '@src/constants/HttpStatusCodes';
+import EnvVars from '@constants/EnvVars';
+import HttpStatusCodes from '@constants/HttpStatusCodes';
 
-import { NodeEnvs } from '@src/constants/misc';
+import { NodeEnvs } from '@constants/misc';
 import { RouteError } from '@other/classes';
 
 
@@ -53,28 +51,9 @@ app.use((err: Error, _: Request, res: Response) => {
 });
 
 
-// ** Front-End Content ** //
-
 const server = createServer(app);
-
-const io = new SocketIOServer(server, { cors: { origin: "*", methods: "*" } });
-
-io.on('connection', (socket) => {
-  console.log('User connected');
-
-  // Escuchar evento 'joinRoom'
-  socket.on('joinRoom', (room) => {
-    console.log(`User joined room ${room}`);
-    socket.join(room);
-  });
-
-  // Escuchar evento 'disconnect'
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
-});
-
-
+const io = initializeSocket(server)
 // **** Export default **** //
+
 
 export { app, server, io }
