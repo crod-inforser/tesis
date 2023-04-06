@@ -23,6 +23,18 @@ convertRouter.post(
   ConverterRoutes.convertFromUrl,
 );
 
+convertRouter.post(
+  Paths.Convert.Pause,
+  validate('room'),
+  ConverterRoutes.pauseStream
+);
+
+convertRouter.post(
+  Paths.Convert.Resume,
+  validate('room'),
+  ConverterRoutes.resumeStream
+);
+
 // Add ConverterRouter
 apiRouter.use(Paths.Convert.Base, convertRouter);
 

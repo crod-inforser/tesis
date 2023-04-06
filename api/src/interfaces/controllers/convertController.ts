@@ -13,6 +13,10 @@ export interface IConvertReq {
     room: string;
 }
 
+export interface IRoomReq {
+  room: string;
+}
+
 export interface IConvertFromUrlParams {
     url: string;
     room: string;

@@ -1,0 +1,20 @@
+export const states: { [key: string]: string } = {
+    "foul_charge_l": "falta del equipo azul",
+    "foul_charge_r": "falta del equipo rojo",
+    "free_kick_fault_l": "falta en tiro libre del equipo azul",
+    "free_kick_fault_r": "falta en tiro libre del equipo rojo",
+    "free_kick_l": "tiro libre para equipo azul",
+    "free_kick_r": "tiro libre para equipo rojo",
+    "goal_kick_l": "saque de porteria equipo azul",
+    "goal_kick_r": "saque de porteria equipo rojo",
+    "goal_l": "gol equipo azul",
+    "goal_r": "gol equipo rojo",
+    "kick_in_l": "saque de banda equipo azul",
+    "kick_in_r": "saque de banda equipo rojo",
+    "kick_off_r": "equipo rojo inicia con saque de centro",
+    "kick_off_l": "equipo azul inicia con saque de centro",
+    "offside_l": "fuera de juego equipo azul",
+    "offside_r": "fuera de juego equipo rojo",
+    "play_on": "jugando...",
+    "time_over": "juego finalizado"
+};

@@ -13,3 +13,13 @@ services:
     volumes:
       - "./api:/app"
     command: sh -c "yarn && yarn dev"
+  simulator:
+    build: simulator
+    ports:
+      - "5500:5500"
+    depends_on:
+      - api
+    environment:
+      REACT_APP_SOCKET: "http://localhost:3000"
+      PORT: "5500"
+      REACT_APP_PORT: "5500"

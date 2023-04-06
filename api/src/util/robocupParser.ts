@@ -101,7 +101,7 @@ function parseInitLine(line: string): InitI {
     const init: InitI = {};
     properties.forEach((property) => {
         const [key, value] = property.split(" ");
-        init[key] = parseFloat(value);
+        init[key.replace('(', '').replace(')', '')] = parseFloat(value);
     });
     return init;
 }
@@ -135,6 +135,8 @@ function parseResultLine(line: string): ResultI {
     };
 }
 
+const posibleActions: string[] = []
+const posibleStatus: string[] = []
 async function processLine(line: string, room: string) {
     if (line.startsWith("(Init")) {
         const init: InitI | null = parseInitLine(line);
@@ -142,13 +144,18 @@ async function processLine(line: string, room: string) {
         sendToIO(room, init);
     } else if (line.startsWith("(Info")) {
         const info: InfoI = parseInfoLine(line)
+        if (!posibleStatus.includes(info.state)) posibleStatus.push(info.state)
+        for (let player of info.players) {
+            player.actions.forEach((action) => {
+                if (!posibleActions.includes(action)) posibleActions.push(action)
+            })
+        }
         sendToIO(room, info);
     } else if (line.startsWith("(Result")) {
         const result: ResultI | null = parseResultLine(line);
         if (!result) throw new Error("No se encontró la línea 'Result' en el archivo");
         sendToIO(room, result);
     }
-    await tick(100);
 }
 
 // Función principal para generar y enviar datos JSON
@@ -160,7 +167,7 @@ export async function generateAndSendJSON({ path, room }: { path: string, room: 
         if (!existsSync(path)) {
             logger.err(`El archivo no existe: ${path}`);
             return;
-        }else logger.info(`file on txt exist!`)
+        } else logger.info(`file on txt exist!`)
 
         const rl = createInterface({
             input: createReadStream(path),
@@ -172,9 +179,10 @@ export async function generateAndSendJSON({ path, room }: { path: string, room: 
             logger.info(`read line ${n}`)
             await processLine(line, room)
             n++;
-            await tick(100);
         }
         logger.info(`end converting`)
+        console.log("actions: ",posibleActions)
+        console.log("status: ",posibleStatus)
     } catch (e) {
         logger.err(`Error on download ${e} `)
     }

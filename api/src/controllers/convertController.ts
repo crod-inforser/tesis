@@ -3,7 +3,8 @@ import { download } from '@services/DownloadService'
 import { convert } from '@services/ConvertService'
 import HttpStatusCodes from '@constants/HttpStatusCodes';
 import { generateAndSendJSON } from '@util/robocupParser';
-import { IConvertReq, IConvertFromUrlParams, IReq, IRes } from '@interfaces/controllers/convertController';
+import { IConvertReq, IConvertFromUrlParams, IReq, IRes, IRoomReq } from '@interfaces/controllers/convertController';
+import { handlePause, handleResume } from '@services/SocketService';
 
 async function convertFromUrl(
     req: IReq<IConvertReq>,
@@ -24,6 +25,26 @@ async function convertFromUrl(
     }
 }
 
+function pauseStream(
+    req: IReq<IRoomReq>,
+    res: IRes
+): void {
+    const room = req.params.room;
+    handlePause(room);
+    res.sendStatus(200);
+}
+
+function resumeStream(
+    req: IReq<IRoomReq>,
+    res: IRes
+): void {
+    const room = req.params.room;
+    handleResume(room);
+    res.sendStatus(200);
+}
+
 export default {
     convertFromUrl,
+    pauseStream,
+    resumeStream
 } as const;

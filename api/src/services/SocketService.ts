@@ -1,25 +1,45 @@
 import { gzipSync } from 'zlib';
 import { io } from '@src/server';
-import { IData } from '@interfaces/services/socketService';
+import { IRoomState } from '@interfaces/services/socketService';
 
-// Define una interfaz para especificar el tipo de los datos a enviar a través del socket
-
+const roomStates: Map<string, IRoomState> = new Map();
 
 // Enviar datos a través de un socket
-export function sendToIO(room: string, data: IData): void {
-    // Convertir los datos a formato JSON
-    const jsonData = JSON.stringify(data);
+export function sendToIO(room: string, data: any): void {
+    const currentState = roomStates.get(room);
+    if (!currentState || !currentState.paused) {
+        const jsonData = JSON.stringify(data);
+        const bufferData = Buffer.from(jsonData, 'utf8');
+        io.to(room).emit('data', gzipSync(bufferData));
+    } else {
+        currentState.pendingData.push(data);
+    }
+}
 
-    // Convertir los datos JSON a un búfer binario utilizando utf8 como codificación
-    const bufferData = Buffer.from(jsonData, 'utf8');
+export function handlePause(room: string): void {
+    const currentState = roomStates.get(room);
+    if (currentState) {
+        currentState.paused = true;
+    } else {
+        roomStates.set(room, { paused: true, pendingData: [] });
+    }
+}
 
-    // Comprimir los datos usando gzip
-    const compressedData = gzipSync(bufferData);
-
-    // Enviar los datos comprimidos al socket del servidor
-    io.to(room).emit('data', compressedData);
+export function handleResume(room: string): void {
+    const currentState = roomStates.get(room);
+    if (currentState) {
+        currentState.paused = false;
+        currentState.pendingData.forEach((data) => {
+            sendToIO(room, data);
+        });
+        currentState.pendingData = [];
+    } else {
+        roomStates.set(room, { paused: false, pendingData: [] });
+    }
 }
 
 export default {
     sendToIO,
+    handlePause,
+    handleResume
 };

@@ -3,15 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.23",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
     "@types/pako": "^2.0.0",
     "@types/react": "^18.0.31",
     "@types/react-dom": "^18.0.11",
     "@types/uuid": "^9.0.1",
+    "add": "^2.0.6",
+    "depcheck": "^1.4.3",
     "pako": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,13 +18,12 @@
     "socket.io-client": "^4.6.1",
     "typescript": "^4.9.5",
     "uuid": "^9.0.0",
-    "web-vitals": "^2.1.4"
+    "yarn": "^1.22.19"
   },
   "scripts": {
-    "start": "set PORT=5500 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "check": "depcheck . --skip-missing=true --oneline"
   },
   "eslintConfig": {
     "extends": [
