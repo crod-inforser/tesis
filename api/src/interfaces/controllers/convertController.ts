@@ -5,8 +5,7 @@ export interface IReq<T = void> extends e.Request {
   body: T;
 }
 
-export interface IRes extends e.Response {
-}
+export type IRes = e.Response
 
 export interface IConvertReq {
     url: string;

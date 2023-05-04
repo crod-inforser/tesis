@@ -11,8 +11,8 @@ const Paths = {
     Base: '/convert',
     Url: '/url',
     Pause: '/pause',
-    Resume: '/resume'
-  }
+    Resume: '/resume',
+  },
 };
 
 

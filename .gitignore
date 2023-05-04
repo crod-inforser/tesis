@@ -4,4 +4,5 @@
 **/**/yarn.lock
 **/**/dist
 **/**/build
-api/download/*
+api/download/*.txt
+api/download/*.gz

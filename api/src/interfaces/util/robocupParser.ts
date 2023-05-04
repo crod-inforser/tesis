@@ -10,8 +10,8 @@ export interface InitI {
 }
 
 export enum SideE {
-    Left = "l",
-    Right = "r",
+    Left = 'l',
+    Right = 'r',
 }
 
 export interface PositionI {

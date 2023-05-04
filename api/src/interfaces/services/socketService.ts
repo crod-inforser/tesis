@@ -1,8 +1,8 @@
 export interface IData {
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 export interface IRoomState {
     paused: boolean;
-    pendingData: any[];
+    pendingData: unknown[];
 }

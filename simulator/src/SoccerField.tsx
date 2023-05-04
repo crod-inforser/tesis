@@ -1,8 +1,7 @@
 // Import React and components
 import React from 'react';
-import Player from './Player';
-import Ball from './Ball';
-import Score from './Score';
+import Players from './components/Players';
+import Ball from './components/Ball';
 import { ISoccerFieldProps } from './interfaces'
 
 // SoccerField component
@@ -23,12 +22,14 @@ const SoccerField: React.FC<ISoccerFieldProps> = ({ data, info }) => {
     const scaleX = (x: number) => (x + fieldWidth / 2) * (viewBoxWidth / fieldWidth);
     const scaleY = (y: number) => (y + fieldHeight / 2) * (viewBoxHeight / fieldHeight);
 
+    const configInfo = { scaleX, scaleY, ballRadius, info, viewBoxHeight, viewBoxWidth, data, playerRadius }
+
     return (
         <svg
             width="100%"
             height="100%"
-            viewBox={`-${viewBoxWidth / 8} -${viewBoxHeight / 6} ${viewBoxWidth + viewBoxWidth / 4} ${viewBoxHeight + viewBoxHeight / 4}`}
-            style={{ background: '#61aa33' }}
+            viewBox={`-${viewBoxWidth / 8} -${viewBoxHeight / 6} ${viewBoxWidth * 1.25} ${viewBoxHeight * 1.25}`}
+            style={{ background: '#61aa33',borderRadius: '0px 50px 50px 0px'  }}
         >
             {/* Field outline */}
             <rect x="0" y="0" width={viewBoxWidth} height={viewBoxHeight} strokeWidth={ballRadius} stroke="white" fill="none" />
@@ -43,26 +44,8 @@ const SoccerField: React.FC<ISoccerFieldProps> = ({ data, info }) => {
             <rect x="-4" y="24" width="4" height="32" strokeWidth={ballRadius} stroke="white" fill="none" />
             <rect x={viewBoxWidth} y="24" width="4" height="32" strokeWidth={ballRadius} stroke="white" fill="none" />
 
-            {/* Players */}
-            {data.players && data.players.length
-                ? data.players.map((player, index) => (
-                    <Player
-                        scaleX={scaleX}
-                        scaleY={scaleY}
-                        player={player}
-                        key={index}
-                        info={info}
-                        playerRadius={playerRadius}
-                    />
-                ))
-                : null}
-
-            {/* Ball */}
-            {data.ball ? (
-                <Ball scaleX={scaleX} scaleY={scaleY} data={data} ballRadius={ballRadius} info={info} />
-            ) : null}
-            {/* Score */}
-            <Score data={data} viewBoxHeight={viewBoxHeight} viewBoxWidth={viewBoxWidth} />
+            <Players {...configInfo} />
+            <Ball {...configInfo} />
         </svg>
     );
 };

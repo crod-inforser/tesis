@@ -4,13 +4,13 @@
 
 import morgan from 'morgan';
 import helmet from 'helmet';
-import express, { Request, Response, } from 'express';
+import express, { Request, Response } from 'express';
 import logger from 'jet-logger';
-import cors from 'cors'
+import cors from 'cors';
 import { createServer } from 'http';
 import 'express-async-errors';
 
-import {initializeSocket} from './socket'
+import {initializeSocket} from './socket';
 import BaseRouter from '@routes/api';
 import Paths from '@routes/constants/Paths';
 
@@ -28,7 +28,7 @@ const app = express();
 // **** Setup **** //
 
 // Basic middleware
-app.use(cors({ origin: "*" }))
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -52,8 +52,8 @@ app.use((err: Error, _: Request, res: Response) => {
 
 
 const server = createServer(app);
-const io = initializeSocket(server)
+const io = initializeSocket(server);
 // **** Export default **** //
 
 
-export { app, server, io }
+export { app, server, io };

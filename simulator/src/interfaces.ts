@@ -1,4 +1,4 @@
-interface IPosition {
+export interface IPosition {
     x: number;
     y: number;
 }
@@ -8,12 +8,12 @@ interface IScore {
     team2: number;
 }
 
-enum ESide {
+export enum ESide {
     Left = "l",
     Right = "r",
 }
 
-interface IData {
+export interface IData {
     ball: IPosition;
     state: string;
     score?: IScore;
@@ -21,13 +21,18 @@ interface IData {
 }
 
 // Define the IPlayer interface
-interface IPlayer {
+export interface IPlayer {
     position: IPosition;
     side: ESide
     number: number;
     isGoalkeeper: boolean;
     stamina: number;
-    actions?: string[];
+    actions?: (EActions.KICK | EActions.TACKLE)[];
+}
+
+export enum EActions {
+    KICK = 'kick',
+    TACKLE = 'tackle',
 }
 
 // Define the IBallProps interface for the Ball component's props
@@ -41,11 +46,12 @@ export interface IBallProps {
 
 // Define the IPlayerProps interface for the Player component's props
 export interface IPlayerProps {
-    player: IPlayer;
+    player?: IPlayer;
     scaleX: (x: number) => number;
     scaleY: (y: number) => number;
     playerRadius: number;
     info?: boolean;
+    data?: IData;
 }
 
 // Define the IScoreProps interface for the Score component's props

@@ -26,13 +26,13 @@ convertRouter.post(
 convertRouter.post(
   Paths.Convert.Pause,
   validate('room'),
-  ConverterRoutes.pauseStream
+  ConverterRoutes.pauseStream,
 );
 
 convertRouter.post(
   Paths.Convert.Resume,
   validate('room'),
-  ConverterRoutes.resumeStream
+  ConverterRoutes.resumeStream,
 );
 
 // Add ConverterRouter
