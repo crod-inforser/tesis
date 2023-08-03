@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import jetValidator from 'jet-validator';
+import multer from 'multer';
 
 import Paths from './constants/Paths';
 import ConverterRoutes from '@controllers/convertController';
@@ -23,16 +24,24 @@ convertRouter.post(
   ConverterRoutes.convertFromUrl,
 );
 
-convertRouter.post(
-  Paths.Convert.Pause,
-  validate('room'),
-  ConverterRoutes.pauseStream,
-);
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'download/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
 
 convertRouter.post(
-  Paths.Convert.Resume,
+  Paths.Convert.Upload,
+  upload.single('rcgFile'),
   validate('room'),
-  ConverterRoutes.resumeStream,
+  ConverterRoutes.convertFromFile,
 );
 
 // Add ConverterRouter

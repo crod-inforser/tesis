@@ -10,8 +10,7 @@ const Paths = {
   Convert: {
     Base: '/convert',
     Url: '/url',
-    Pause: '/pause',
-    Resume: '/resume',
+    Upload: '/upload',
   },
 };
 

@@ -4,7 +4,7 @@ import { convert } from '@services/ConvertService';
 import HttpStatusCodes from '@constants/HttpStatusCodes';
 import { generateAndSendJSON } from '@util/robocupParser';
 import {
-  IConvertReq, IConvertFromUrlParams, IReq, IRes, IRoomReq,
+  IConvertReq, IConvertFromUrlParams, IReq, IRes, IRoomReq, IUploadReq,
 } from '@interfaces/controllers/convertController';
 import { handlePause, handleResume } from '@services/SocketService';
 
@@ -28,26 +28,35 @@ async function convertFromUrl(
   }
 }
 
-function pauseStream(
-  req: IReq<IRoomReq>,
+async function convertFromFile(
+  req: IReq<IUploadReq>,
   res: IRes,
-): void {
-  const room = req.params.room;
-  handlePause(room);
-  res.sendStatus(200);
+): Promise<void> {
+  try {
+
+    const { room } = req.body as IUploadReq;
+    const file = req.file;
+    if (!file)
+      res.status(400).json({ message: 'No se ha seleccionado ningún archivo.' });
+
+    logger.info(`new request from /upload, room: ${room}, file: ${file.filename} `);
+    const name = file.filename
+    await convert({ name });
+    generateAndSendJSON({ path: `./download/${name}.txt`, room });
+    logger.info('end request');
+    res.status(HttpStatusCodes.OK).json({ data: null });
+  }
+  catch (error: unknown) {
+    if (error && typeof error === 'string')
+      logger.err(`Error on download ${error} `);
+    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ data: null });
+  }
+
+
 }
 
-function resumeStream(
-  req: IReq<IRoomReq>,
-  res: IRes,
-): void {
-  const room = req.params.room;
-  handleResume(room);
-  res.sendStatus(200);
-}
 
 export default {
   convertFromUrl,
-  pauseStream,
-  resumeStream,
+  convertFromFile
 } as const;

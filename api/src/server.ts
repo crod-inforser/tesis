@@ -42,15 +42,6 @@ if (EnvVars.NodeEnv === NodeEnvs.Production) app.use(helmet());
 // Add APIs, must be after middleware
 app.use(Paths.Base, BaseRouter);
 
-// Add error handler
-app.use((err: Error, _: Request, res: Response) => {
-  if (EnvVars.NodeEnv !== NodeEnvs.Test) logger.err(err, true);
-  let status = HttpStatusCodes.BAD_REQUEST;
-  if (err instanceof RouteError) status = err.status;
-  return res.status(status).json({ error: err.message });
-});
-
-
 const server = createServer(app);
 const io = initializeSocket(server);
 // **** Export default **** //

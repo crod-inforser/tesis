@@ -12,6 +12,10 @@ export interface IConvertReq {
     room: string;
 }
 
+export interface IUploadReq {
+  room: string;
+}
+
 export interface IRoomReq {
   room: string;
 }

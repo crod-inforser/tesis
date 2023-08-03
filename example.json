@@ -1,0 +1,425 @@
+{
+    "state": "play_on",
+    "time": 5117,
+    "score": {
+        "team1": 1,
+        "team2": 4
+    },
+    "ball": {
+        "x": 3.7449,
+        "y": -5.1221,
+        "vx": 0.7878,
+        "vy": 0.0776
+    },
+    "players": [
+        {
+            "side": "l",
+            "number": 1,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 12.9965,
+                "y": 28.8021,
+                "vx": 0.140198,
+                "vy": 0.0984039,
+                "bodyAngle": -22.5709,
+                "neckAngle": -110.571
+            },
+            "stamina": 7052.87,
+            "actions": [
+                "turn",
+                "say"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 2,
+            "isGoalkeeper": false,
+            "position": {
+                "x": -16.8529,
+                "y": 14.5812,
+                "vx": 0.0755005,
+                "vy": 0.0527039,
+                "bodyAngle": 36.4874,
+                "neckAngle": -35.1122
+            },
+            "stamina": 6315.49,
+            "actions": [
+                "dash",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 3,
+            "isGoalkeeper": false,
+            "position": {
+                "x": -16.702,
+                "y": -17.8634,
+                "vx": 0.0899048,
+                "vy": -0.0372925,
+                "bodyAngle": -21.1694,
+                "neckAngle": 12.8307
+            },
+            "stamina": 7529.74,
+            "actions": [
+                "dash",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 4,
+            "isGoalkeeper": false,
+            "position": {
+                "x": -16.0745,
+                "y": -7.2722,
+                "vx": 0.0399933,
+                "vy": 0.000900269,
+                "bodyAngle": -21.7517,
+                "neckAngle": -99.0515
+            },
+            "stamina": 7858.05,
+            "actions": [
+                "turn",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 5,
+            "isGoalkeeper": false,
+            "position": {
+                "x": -16.9918,
+                "y": 4.1261,
+                "vx": 0.0718994,
+                "vy": 0.0500946,
+                "bodyAngle": 34.0622,
+                "neckAngle": -25.838
+            },
+            "stamina": 5348.13,
+            "actions": [
+                "dash",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 6,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 2.82719,
+                "y": -5.69569,
+                "vx": 0.0863037,
+                "vy": 0.0153961,
+                "bodyAngle": 9.65537,
+                "neckAngle": -80.3449
+            },
+            "stamina": 7710.37,
+            "actions": [
+                "kick",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 7,
+            "isGoalkeeper": true,
+            "position": {
+                "x": -45.3206,
+                "y": -1.3008,
+                "vx": 0.119003,
+                "vy": -0.012207,
+                "bodyAngle": -6.94603,
+                "neckAngle": -7.2459
+            },
+            "stamina": 7998.27,
+            "actions": [
+                "dash",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 8,
+            "isGoalkeeper": false,
+            "position": {
+                "x": -1.94521,
+                "y": 9.2841,
+                "vx": 0.0646057,
+                "vy": -0.030304,
+                "bodyAngle": -22.6697,
+                "neckAngle": -83.9696
+            },
+            "stamina": 6746.04,
+            "actions": [
+                "dash",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 9,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 12.3253,
+                "y": 5.0433,
+                "vx": 0.203293,
+                "vy": -0.145706,
+                "bodyAngle": -32.9851,
+                "neckAngle": -6.6855
+            },
+            "stamina": 7167.22,
+            "actions": [
+                "dash",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 10,
+            "isGoalkeeper": false,
+            "position": {
+                "x": -3.11681,
+                "y": -2.8853,
+                "vx": 0.0872955,
+                "vy": -0.0175018,
+                "bodyAngle": -8.43228,
+                "neckAngle": 8.86766
+            },
+            "stamina": 7939.73,
+            "actions": [
+                "dash",
+                "say",
+                "change_view"
+            ]
+        },
+        {
+            "side": "l",
+            "number": 11,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 12.6918,
+                "y": -28.9231,
+                "vx": 0.329193,
+                "vy": -0.166306,
+                "bodyAngle": -24.6333,
+                "neckAngle": 63.9664
+            },
+            "stamina": 7085,
+            "actions": [
+                "dash",
+                "say"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 1,
+            "isGoalkeeper": true,
+            "position": {
+                "x": 36.914,
+                "y": -0.266693,
+                "vx": -0.000198364,
+                "vy": 0,
+                "bodyAngle": -178.383,
+                "neckAngle": -121.383
+            },
+            "stamina": 8000,
+            "actions": [
+                "turn",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 2,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 14.7759,
+                "y": -5.0596,
+                "vx": 0.254105,
+                "vy": 0.133606,
+                "bodyAngle": 27.3068,
+                "neckAngle": 111.307
+            },
+            "stamina": 7834.84,
+            "actions": [
+                "dash",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 3,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 11.3579,
+                "y": 10.0702,
+                "vx": 0.214096,
+                "vy": 0.113205,
+                "bodyAngle": 23.5474,
+                "neckAngle": 107.548
+            },
+            "stamina": 7530.71,
+            "actions": [
+                "dash",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 4,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 12.7846,
+                "y": -24.1474,
+                "vx": 0.174606,
+                "vy": -0.1642,
+                "bodyAngle": -39.6313,
+                "neckAngle": -129.632
+            },
+            "stamina": 7454.71,
+            "actions": [
+                "dash",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 5,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 16.4702,
+                "y": 3.9993,
+                "vx": 0.319,
+                "vy": 0.0966949,
+                "bodyAngle": 18.8282,
+                "neckAngle": -71.1721
+            },
+            "stamina": 7405.79,
+            "actions": [
+                "dash",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 6,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 10.0462,
+                "y": -3.3607,
+                "vx": 0.218002,
+                "vy": 0.00810242,
+                "bodyAngle": 0.774598,
+                "neckAngle": -41.2251
+            },
+            "stamina": 7155.77,
+            "actions": [
+                "dash",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 7,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 0.6642,
+                "y": 13.0726,
+                "vx": -0.053894,
+                "vy": 0.219101,
+                "bodyAngle": 104.316,
+                "neckAngle": 14.3161
+            },
+            "stamina": 6418.55,
+            "actions": [
+                "dash",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 8,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 2.8385,
+                "y": -7.06821,
+                "vx": 0.153503,
+                "vy": 0.1642,
+                "bodyAngle": 45.0447,
+                "neckAngle": 66.0445
+            },
+            "stamina": 6493.35,
+            "actions": [
+                "dash",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 9,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 1.27409,
+                "y": 18.4036,
+                "vx": -0.220993,
+                "vy": 0.123093,
+                "bodyAngle": 154.863,
+                "neckAngle": 64.8625
+            },
+            "stamina": 6217.91,
+            "actions": [
+                "dash",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 10,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 2.026,
+                "y": -18.0466,
+                "vx": -0.164902,
+                "vy": 0.161804,
+                "bodyAngle": 134.399,
+                "neckAngle": 91.3991
+            },
+            "stamina": 5363.63,
+            "actions": [
+                "dash",
+                "say",
+                "turn_neck"
+            ]
+        },
+        {
+            "side": "r",
+            "number": 11,
+            "isGoalkeeper": false,
+            "position": {
+                "x": 9.57739,
+                "y": 1.4442,
+                "vx": 0.0122986,
+                "vy": -0.0104065,
+                "bodyAngle": -161.918,
+                "neckAngle": -141.918
+            },
+            "stamina": 5924.61,
+            "actions": [
+                "turn",
+                "say",
+                "turn_neck",
+                "change_view"
+            ]
+        }
+    ]
+}
