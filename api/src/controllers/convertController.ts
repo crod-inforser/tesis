@@ -1,12 +1,12 @@
 import logger from 'jet-logger';
-import { download } from '@services/DownloadService';
-import { convert } from '@services/ConvertService';
-import HttpStatusCodes from '@constants/HttpStatusCodes';
-import { generateAndSendJSON } from '@util/robocupParser';
+import { download } from '../services/DownloadService';
+import { convert } from '../services/ConvertService';
+import HttpStatusCodes from '../constants/HttpStatusCodes';
+import { generateAndSendJSON } from '../util/robocupParser';
 import {
   IConvertReq, IConvertFromUrlParams, IReq, IRes, IRoomReq, IUploadReq,
-} from '@interfaces/controllers/convertController';
-import { handlePause, handleResume } from '@services/SocketService';
+} from '../interfaces/controllers/convertController';
+import { handlePause, handleResume } from '../services/SocketService';
 
 async function convertFromUrl(
   req: IReq<IConvertReq>,

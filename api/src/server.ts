@@ -10,15 +10,15 @@ import cors from 'cors';
 import { createServer } from 'http';
 import 'express-async-errors';
 
-import {initializeSocket} from './socket';
-import BaseRouter from '@routes/api';
-import Paths from '@routes/constants/Paths';
+import { initializeSocket } from './socket';
+import BaseRouter from './routes/api';
+import Paths from './routes/constants/Paths';
 
-import EnvVars from '@constants/EnvVars';
-import HttpStatusCodes from '@constants/HttpStatusCodes';
+import EnvVars from './constants/EnvVars';
+import HttpStatusCodes from './constants/HttpStatusCodes';
 
-import { NodeEnvs } from '@constants/misc';
-import { RouteError } from '@other/classes';
+import { NodeEnvs } from './constants/misc';
+import { RouteError } from './other/classes';
 
 
 // **** Variables **** //
@@ -28,7 +28,9 @@ const app = express();
 // **** Setup **** //
 
 // Basic middleware
-app.use(cors({ origin: '*' }));
+app.use(cors({
+    origin: process.env.CORS || '*'
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

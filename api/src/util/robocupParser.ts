@@ -1,10 +1,10 @@
 import { createReadStream, existsSync } from 'fs';
 import { createInterface } from 'readline';
 import logger from 'jet-logger';
-import { sendToIO } from '@services/SocketService';
+import { sendToIO } from '../services/SocketService';
 import {
   BallI, InfoI, InitI, PlayerI, PositionI, ResultI, SideE,
-} from '@interfaces/util/robocupParser';
+} from '../interfaces/util/robocupParser';
 
 
 // Envia datos a una sala específica a través de un socket IO

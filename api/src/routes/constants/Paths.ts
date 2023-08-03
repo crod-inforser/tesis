@@ -2,7 +2,7 @@
  * Express router paths go here.
  */
 
-import { Immutable } from '@other/types';
+import { Immutable } from '../../other/types';
 
 
 const Paths = {

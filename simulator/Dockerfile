@@ -1,5 +1,9 @@
 FROM node:19
 WORKDIR /app
-COPY . .
+COPY package.json .
 RUN yarn
-CMD ["yarn","start"]
+COPY . .
+RUN yarn build
+RUN yarn global add serve
+
+CMD ["serve","-s", "build"]

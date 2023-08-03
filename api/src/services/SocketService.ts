@@ -1,6 +1,6 @@
 import { gzipSync } from 'zlib';
-import { io } from '@src/server';
-import { IRoomState } from '@interfaces/services/socketService';
+import { io } from '../server';
+import { IRoomState } from '../interfaces/services/socketService';
 
 const roomStates: Map<string, IRoomState> = new Map();
 

@@ -3,7 +3,7 @@ import jetValidator from 'jet-validator';
 import multer from 'multer';
 
 import Paths from './constants/Paths';
-import ConverterRoutes from '@controllers/convertController';
+import ConverterRoutes from '../controllers/convertController';
 
 
 // **** Variables **** //

@@ -2,9 +2,9 @@ import { promisify } from 'util';
 import { exec } from 'child_process';
 import logger from 'jet-logger';
 
-import { IConvertParams } from '@interfaces/services/downloadService';
-import { RouteError } from '@other/classes';
-import HttpStatusCodes from '@constants/HttpStatusCodes';
+import { IConvertParams } from '../interfaces/services/downloadService';
+import { RouteError } from '../other/classes';
+import HttpStatusCodes from '../constants/HttpStatusCodes';
 import { readdirSync } from 'fs';
 
 const do_exec = promisify(exec);

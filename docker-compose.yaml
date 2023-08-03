@@ -7,12 +7,24 @@ services:
   api:
     build: api
     ports:
-      - "3000:3000"
+      - "5000:5000"
     depends_on:
       - converter
-    volumes:
-      - "./api:/app"
-    command: sh -c "yarn && yarn dev"
+    environment:
+      PORT: "5000"
+      CORS: "https://robocup.inforser.cl"
+    network_mode: "reverse-proxy"
+    container_name: api.robocup
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=reverse-proxy"
+      - "traefik.http.services.api.loadbalancer.server.port=5000"
+      - "traefik.http.routers.api.service=api"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.rule=Host(`api.robocup.inforser.cl`)"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.routers.api.tls.certresolver=letsencrypt"
   simulator:
     build: simulator
     ports:
@@ -20,6 +32,17 @@ services:
     depends_on:
       - api
     environment:
-      REACT_APP_SOCKET: "http://localhost:3000"
-      PORT: "5500"
+      REACT_APP_SOCKET: "https://api.robocup.inforser.cl"
       REACT_APP_PORT: "5500"
+    network_mode: "reverse-proxy"
+    container_name: robocup
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=reverse-proxy"
+      - "traefik.http.services.simulator.loadbalancer.server.port=5500"
+      - "traefik.http.routers.simulator.service=simulator"
+      - "traefik.http.routers.simulator.entrypoints=websecure"
+      - "traefik.http.routers.simulator.rule=Host(`robocup.inforser.cl`)"
+      - "traefik.http.routers.simulator.tls=true"
+      - "traefik.http.routers.simulator.tls.certresolver=letsencrypt"

@@ -2,9 +2,9 @@ import { createWriteStream, readdirSync } from 'fs';
 import axios from 'axios';
 import logger from 'jet-logger';
 import { pipeline } from 'stream/promises';
-import { IDownloadParams } from '@interfaces/services/downloadService';
-import HttpStatusCodes from '@constants/HttpStatusCodes';
-import { RouteError } from '@other/classes';
+import { IDownloadParams } from '../interfaces/services/downloadService';
+import HttpStatusCodes from '../constants/HttpStatusCodes';
+import { RouteError } from '../other/classes';
 
 
 // Errors
